@@ -53,7 +53,7 @@
 
 ## Screenshots
 
-![Popup Screenshot](assets/screenshot/popup-screenshot.png)  
+![Popup Screenshot](assets/screenshots/popup-screenshot.png)  
 
 ---
 
