@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'self'">
+  <title>Log Job</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <img id="logo" src="icons/icon128.png" alt="Job Tracker Logo">
+  <h2>Job Application Tracking Service</h2>
+
+  <div id="signInStatus" class="not-signed-in">Checking sign-in...</div>
+  <button id="signInBtn">Sign in with Google</button>
+
+  <form id="jobForm" method="POST">
+    <input type="hidden" id="payload" name="payload">
+    <label for="sheetInput">Google Sheet URL:</label>
+    <input type="text" id="sheetInput" placeholder="Paste your Google Sheet URL here">
+
+    <div class="checkbox-container">
+      <input type="checkbox" id="saveLinkCheckbox">
+      <label for="saveLinkCheckbox">Save this link for next time</label>
+    </div>
+
+    <label for="loginSelect">Login Type:</label>
+    <select id="loginSelect">
+      <option value="Default">Default (LinkedIn / Handshake / Jacobs Portal)</option>
+      <option value="Google Email">Google Email</option>
+      <option value="Apple ID">Apple ID</option>
+    </select>
+
+    <button type="button" id="logJob">Log Job</button>
+  </form>
+
+  <div id="donateSection">
+    <h3>Support J.A.T.S.</h3>
+    <a href="https://www.buymeacoffee.com/ethannguyenhuu" target="_blank" style="text-decoration:none; display:inline-block; margin-bottom:8px;">
+      <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy Me a Coffee" style="height:40px; vertical-align:middle;">
+      <span style="font-weight:bold; margin-left:6px; vertical-align:middle;">Buy Me a Coffee</span>
+    </a>
+    <br>
+    <a href="https://www.paypal.com/ncp/payment/8XFVLHVZJCJMY" target="_blank" 
+       style="display:inline-block; padding:10px 16px; background-color:#28a745; color:white; font-weight:bold; border-radius:6px; text-decoration:none; text-align:center; font-size:14px; cursor:pointer; margin-top:6px;">
+       Donate via PayPal
+    </a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
