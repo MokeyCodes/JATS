@@ -53,8 +53,7 @@
 
 ## Screenshots
 
-![Popup Screenshot](assets/icons/icon128.png)  
-*(Replace with actual screenshot or GIF of the popup UI)*
+![Popup Screenshot](assets/screenshot/popup-screenshot.png)  
 
 ---
 
