@@ -6,9 +6,11 @@ All notable changes to this project will be documented in this file.
 ### Added
 - README improvements
     - Side by side screenshots of UI Improvements
+    - Google Form Request for Features/Website Functionality/Bugs
 - Dropdowns
     - Added a button to copy a Google Sheets Template
     - Donation Dropdown
+    - Request New Website Support/Bug
 - Updated job logging UI
   - Replaced `alert()` pop-ups with inline animation for job log confirmation
 

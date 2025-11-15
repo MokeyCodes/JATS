@@ -30,7 +30,17 @@
 You can install J.A.T.S. directly from the Chrome Web Store:
 
 ➡️ **[Chrome Web Store Link](https://chromewebstore.google.com/whatever)**  
-(Waiting for approval, link unavailable as of now.)
+
+---
+
+### Request New Website Support
+Want J.A.T.S. to work on another job site?  
+Have a feature request or noticed a bug?  
+
+Submit a **[Google Form Request](https://docs.google.com/forms/d/e/1FAIpQLSeR4HpD_-Bg5dmjOml70jW9sVLHK2BCerNlQK-RXs1wrUjySw/viewform?usp=dialog)**.  
+
+Popular requests will be prioritized in future updates.
+
 
 ---
 

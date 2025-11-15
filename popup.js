@@ -304,5 +304,24 @@ logButton.addEventListener("click", async () => {
   }
 });
 
+// === Collapsible Feature / Bug Request ===
+const collapBtn = document.querySelector('.collapsible-btn');
+const collapContent = document.querySelector('.collapsible-content');
+
+if (collapBtn && collapContent) {
+    collapBtn.addEventListener('click', () => {
+        collapContent.style.display = collapContent.style.display === 'block' ? 'none' : 'block';
+    });
+}
+
+const featureBtn = document.getElementById('featureRequestBtn');
+if (featureBtn) {
+    featureBtn.addEventListener('click', () => {
+        chrome.tabs.create({
+            url: "https://docs.google.com/forms/d/e/1FAIpQLSeR4HpD_-Bg5dmjOml70jW9sVLHK2BCerNlQK-RXs1wrUjySw/viewform?usp=dialog"
+        });
+    });
+}
+
 // === Initialize popup ===
 updateSignInStatus();

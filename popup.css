@@ -164,3 +164,50 @@ input[type="hidden"] {
     margin-top: 6px;
     border-color: #ccc;
 }
+.collapsible-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.2s ease;
+    margin-top: 8px;
+}
+
+.collapsible-btn:hover {
+    background-color: #0056b3;
+}
+
+.collapsible-content {
+    display: none; /* Hidden by default */
+    padding: 10px 0;
+}
+
+.popup-btn {
+    background-color: #28a745; /* Green button inside collapsible */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.popup-btn:hover {
+    background-color: #218838;
+}
+
+details {
+    width: 100%;
+    margin: 4px 0; /* consistent top & bottom spacing */
+}
+
+details summary {
+    font-weight: bold;
+    cursor: pointer;
+}
