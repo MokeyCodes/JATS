@@ -37,6 +37,12 @@
 3. Enable **Developer mode** (top right)  
 4. Click **Load unpacked** → select the `JATS` folder  
 
+## Template Google Sheet
+
+A ready-to-use Google Sheet specifically made for J.A.T.S.:
+
+[📄 JATS Template Sheet](https://docs.google.com/spreadsheets/d/1A27FybT8BFsiGHfN-kyCkZ5JMO502bzirGSX5UFXmHA/copy)
+
 ---
 
 ## Usage
