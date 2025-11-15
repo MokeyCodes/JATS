@@ -27,15 +27,67 @@
 
 ## Installation
 
-1. Download or clone this repository:
+You can install J.A.T.S. directly from the Chrome Web Store:
 
-    ``` 
-    git clone https://github.com/<your-username>/JATS.git
-    ```
+➡️ **[Chrome Web Store Link](https://chromewebstore.google.com/whatever)**  
+(Waiting for approval, link unavailable as of now.)
 
-2. Open **Chrome** → `chrome://extensions/`  
-3. Enable **Developer mode** (top right)  
-4. Click **Load unpacked** → select the `JATS` folder  
+---
+
+## Local Development (Unpacked Mode)
+
+You can load **J.A.T.S.** locally for development by running it as an unpacked extension.  
+**Important:** Google OAuth (used for Google sign-in and Sheets logging) will **not work** automatically in unpacked mode.
+
+### Why OAuth Fails in Unpacked Mode
+The published extension uses a Google OAuth Client ID that is tied to the **official Chrome Web Store extension ID**.
+
+When loaded as an unpacked extension, Chrome generates a **different temporary extension ID**, causing Google OAuth to reject the request.  
+This is expected behavior for any Chrome extension using Google OAuth.
+
+---
+
+## How to Run Locally (UI Only)
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/MokeyCodes/JATS.git
+   ```
+
+2. Open Chrome and visit:
+
+   ```
+   chrome://extensions/
+   ```
+
+3. Enable **Developer mode**  
+4. Click **Load unpacked**  
+5. Select the `JATS` folder
+
+This loads the UI, but Google sign-in + Google Sheets logging will not function without your own OAuth credentials.
+
+---
+
+## Enabling Google OAuth Locally (Optional)
+
+If you want Google Sheets logging to work in unpacked mode:
+
+1. Open **Google Cloud Console** → APIs & Services → **Credentials**
+2. Create an **OAuth 2.0 Client ID** (Application type: *Chrome Extension*)
+3. Find your Local JATS **ID** from **Details** in `chrome://extensions/`
+4. Add that ID as the Item ID in the OAuth Client ID creation
+5. Replace the `CLIENT_ID` in the code with the new client ID
+
+After this, Google sign-in and Sheets logging will work locally.
+
+---
+
+## Summary
+
+- The UI can be tested locally  
+- Google OAuth (Logging Jobs) will **not work** unless you create your own OAuth Client ID  
+- The published Chrome Web Store version is not affected
 
 ---
 
