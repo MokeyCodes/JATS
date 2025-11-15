@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="icons/icon128.png" alt="JATS Logo" width="128">
+</p>
+
+
 # JATS (Job Application Tracking Software)
 
 **Chrome Extension to log job applications from LinkedIn, Handshake, and UCSD Jacobs Portal into Google Sheets.**
