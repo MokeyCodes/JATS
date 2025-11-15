@@ -6,8 +6,7 @@
 # JATS (Job Application Tracking Software)
 
 **Chrome Extension to log job applications from LinkedIn, Handshake, and UCSD Jacobs Portal into Google Sheets.**
-Could work on other websites, however there is less functionality
----
+<sub>May work on other sites, but functionality is limited.</sub>
 
 ## Features
 
