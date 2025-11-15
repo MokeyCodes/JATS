@@ -118,8 +118,12 @@ A ready-to-use Google Sheet specifically made for J.A.T.S.:
 
 ## Screenshots
 
-![Popup Screenshot](assets/screenshots/popup-screenshot.png)  
+| v1.0.0 | v1.0.1 |
+|--------|--------|
+| <img src="assets/screenshots/popup-1.0.0.png" alt="v1.0.0" width="300"/> | <img src="assets/screenshots/popup-1.0.1.png" alt="v1.0.1" width="300"/> |
 
+---
+For full version history, see [CHANGELOG.md](CHANGELOG.md)
 ---
 
 ## License

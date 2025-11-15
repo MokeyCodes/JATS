@@ -18,6 +18,7 @@
     <label for="sheetInput">Google Sheet URL:</label>
     <input type="text" id="sheetInput" placeholder="Paste your Google Sheet URL here">
 
+
     <div class="checkbox-container">
       <input type="checkbox" id="saveLinkCheckbox">
       <label for="saveLinkCheckbox">Save this link for next time</label>
@@ -32,19 +33,41 @@
 
     <button type="button" id="logJob">Log Job</button>
   </form>
+  <div id="jobStatus" class="job-status"></div>
 
-  <div id="donateSection">
+
+<!-- Space between Log Job button and Template link -->
+<div style="height:16px;"></div> <!-- small spacer -->
+
+<!-- Template Link Collapsible -->
+<details style="width:100%; margin-bottom:4px;"> <!-- smaller bottom margin -->
+  <summary style="font-weight:bold; cursor:pointer;">Need a template?</summary>
+  <a href="https://docs.google.com/spreadsheets/d/1A27FybT8BFsiGHfN-kyCkZ5JMO502bzirGSX5UFXmHA/copy" 
+     target="_blank" 
+     style="display:inline-block; padding:8px 12px; background-color:#0073e6; color:white; border-radius:6px; text-decoration:none; font-weight:bold; margin-top:5px;">
+    Make a Copy of the Template
+  </a>
+</details>
+
+<!-- Donation Box Collapsible -->
+<details style="width:100%; margin-top:4px;"> <!-- smaller top margin -->
+  <summary style="font-weight:bold; cursor:pointer;">Support J.A.T.S.</summary>
+  <div id="donateSection" style="margin-top:8px;">
     <h3>Support J.A.T.S.</h3>
-    <a href="https://www.buymeacoffee.com/ethannguyenhuu" target="_blank" style="text-decoration:none; display:inline-block; margin-bottom:8px;">
-      <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy Me a Coffee" style="height:40px; vertical-align:middle;">
-      <span style="font-weight:bold; margin-left:6px; vertical-align:middle;">Buy Me a Coffee</span>
-    </a>
+    <a href="https://www.buymeacoffee.com/ethannguyenhuu" target="_blank"
+   style="display:inline-block; margin-bottom:8px; padding:8px 12px; border:2px solid #ffdd00; border-radius:8px; text-decoration:none; background-color:white;">
+  <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy Me a Coffee" style="height:40px; vertical-align:middle;">
+  <span style="font-weight:bold; margin-left:6px; vertical-align:middle;">Buy Me a Coffee</span>
+</a>
+
     <br>
     <a href="https://www.paypal.com/ncp/payment/8XFVLHVZJCJMY" target="_blank" 
        style="display:inline-block; padding:10px 16px; background-color:#28a745; color:white; font-weight:bold; border-radius:6px; text-decoration:none; text-align:center; font-size:14px; cursor:pointer; margin-top:6px;">
        Donate via PayPal
     </a>
   </div>
+</details>
+
 
   <script src="popup.js"></script>
 </body>

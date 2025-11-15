@@ -5,6 +5,7 @@ const sheetUrlInput = document.getElementById("sheetInput");
 const saveCheckbox = document.getElementById("saveLinkCheckbox");
 const signInStatus = document.getElementById("signInStatus");
 const signInBtn = document.getElementById("signInBtn");
+const jobStatusDiv = document.getElementById("jobStatus"); // NEW
 
 // === OAuth scope ===
 const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
@@ -78,94 +79,76 @@ async function appendRow(sheetId, row) {
     if (rowIndex === null) return appendData;
 
     // --- Step 4: Determine colors ---
-const loginColors = {
-  "LinkedIn": { red: 0.79, green: 0.85, blue: 0.97 }, // #c9daf8
-  "Handshake": { red: 0.83, green: 0.98, blue: 0.33 }, // #d3fb53
-  "Apple ID": { red: 0.60, green: 0.60, blue: 0.60 },  // #999999
-  "Google Email": { red: 0.26, green: 0.52, blue: 0.96 }, // #4285F4
-  "Jacobs Portal": { red: 0.85, green: 0.69, blue: 0.85 } // #DAB1DA
-};
+    const loginColors = {
+      "LinkedIn": { red: 0.79, green: 0.85, blue: 0.97 },
+      "Handshake": { red: 0.83, green: 0.98, blue: 0.33 },
+      "Apple ID": { red: 0.60, green: 0.60, blue: 0.60 },
+      "Google Email": { red: 0.26, green: 0.52, blue: 0.96 },
+      "Jacobs Portal": { red: 0.85, green: 0.69, blue: 0.85 }
+    };
 
-const requests = [];
+    const requests = [];
 
-// --- Reset company cell style first ---
-requests.push({
-  repeatCell: {
-    range: {
-      sheetId: sheetIdNum,
-      startRowIndex: rowIndex,
-      endRowIndex: rowIndex + 1,
-      startColumnIndex: 2,
-      endColumnIndex: 3
-    },
-    cell: { userEnteredFormat: { textFormat: { bold: false, foregroundColor: { red: 0, green: 0, blue: 0 } } } },
-    fields: "userEnteredFormat.textFormat"
-  }
-});
+    // --- Reset company cell style first ---
+    requests.push({
+      repeatCell: {
+        range: { sheetId: sheetIdNum, startRowIndex: rowIndex, endRowIndex: rowIndex + 1, startColumnIndex: 2, endColumnIndex: 3 },
+        cell: { userEnteredFormat: { textFormat: { bold: false, foregroundColor: { red: 0, green: 0, blue: 0 } } } },
+        fields: "userEnteredFormat.textFormat"
+      }
+    });
 
-// --- Apply red + bold only if no company found ---
-if (row[2] === "No Company Found") {
-  requests.push({
-    repeatCell: {
-      range: {
-        sheetId: sheetIdNum,
-        startRowIndex: rowIndex,
-        endRowIndex: rowIndex + 1,
-        startColumnIndex: 2,
-        endColumnIndex: 3
-      },
-      cell: { userEnteredFormat: { textFormat: { bold: true, foregroundColor: { red: 1, green: 0, blue: 0 } } } },
-      fields: "userEnteredFormat.textFormat"
-    }
-  });
-}
-
-// --- Format loginInfo cell (column F / index 5) ---
-const loginFormat = loginColors[row[5]];
-if (loginFormat) {
-  requests.push({
-    repeatCell: {
-      range: {
-        sheetId: sheetIdNum,
-        startRowIndex: rowIndex,
-        endRowIndex: rowIndex + 1,
-        startColumnIndex: 5,
-        endColumnIndex: 6
-      },
-      cell: {
-        userEnteredFormat: {
-          backgroundColor: loginFormat,
-          horizontalAlignment: "CENTER",
-          textFormat: { bold: true }
+    // --- Apply red + bold only if no company found ---
+    if (row[2] === "No Company Found") {
+      requests.push({
+        repeatCell: {
+          range: { sheetId: sheetIdNum, startRowIndex: rowIndex, endRowIndex: rowIndex + 1, startColumnIndex: 2, endColumnIndex: 3 },
+          cell: { userEnteredFormat: { textFormat: { bold: true, foregroundColor: { red: 1, green: 0, blue: 0 } } } },
+          fields: "userEnteredFormat.textFormat"
         }
-      },
-      fields: "userEnteredFormat(backgroundColor,horizontalAlignment,textFormat)"
+      });
     }
-  });
-}
 
+    // --- Format loginInfo cell (column F / index 5) ---
+    const loginFormat = loginColors[row[5]];
+    if (loginFormat) {
+      requests.push({
+        repeatCell: {
+          range: { sheetId: sheetIdNum, startRowIndex: rowIndex, endRowIndex: rowIndex + 1, startColumnIndex: 5, endColumnIndex: 6 },
+          cell: { userEnteredFormat: { backgroundColor: loginFormat, horizontalAlignment: "CENTER", textFormat: { bold: true } } },
+          fields: "userEnteredFormat(backgroundColor,horizontalAlignment,textFormat)"
+        }
+      });
+    }
 
-// --- Step 5: Send batchUpdate if needed ---
-if (requests.length > 0) {
-  await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}:batchUpdate`, {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ requests })
-  });
-}
+    // --- Step 5: Send batchUpdate if needed ---
+    if (requests.length > 0) {
+      await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}:batchUpdate`, {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ requests })
+      });
+    }
 
+    // --- Step 6: Non-blocking success notification ---
+    jobStatusDiv.textContent = "🤑 Job logged successfully! 💰";
+    jobStatusDiv.classList.add("show");
+    setTimeout(() => {
+      jobStatusDiv.classList.remove("show");
+      jobStatusDiv.textContent = "";
+    }, 3000);
 
-    alert("✅ Job logged successfully!");
     return appendData;
   } catch (err) {
     console.error(err);
-    alert("❌ Failed to log job: " + err.message);
+    jobStatusDiv.textContent = "❌ Failed to log job: " + err.message;
+    jobStatusDiv.classList.add("show");
+    setTimeout(() => {
+      jobStatusDiv.classList.remove("show");
+      jobStatusDiv.textContent = "";
+    }, 5000);
   }
 }
-
 
 // === Extract job info from active tab ===
 async function extractJobInfo() {
@@ -204,14 +187,17 @@ async function extractJobInfo() {
             if (span && span.innerText.trim()) { company = span.innerText.trim(); break; }
           }
         } else if (url.includes("joinhandshake.com")) {
-          const h1 = document.querySelector("h1");
-          if (h1) {
-            const companyDiv = h1.closest("div")?.querySelector("a > div.sc-gtMvKj.fXpKiB");
-            if (companyDiv) company = companyDiv.innerText.trim();
-          }
-          if (company === "No Company Found") {
-            const h3 = document.querySelector("h3");
-            if (h3) company = h3.innerText.trim();
+          // Robust Handshake extraction
+          const jobDetailsContainer = document.querySelector('[data-hook="job-details-page"]');
+          if (jobDetailsContainer) {
+            const companyDiv = jobDetailsContainer.querySelector('div');
+            if (companyDiv) {
+              const textEls = Array.from(companyDiv.querySelectorAll('*'))
+                .filter(el => el.innerText.trim().length > 0);
+              if (textEls.length > 0) {
+                company = textEls[0].innerText.trim().split("\n")[0];
+              }
+            }
           }
         } else if (url.includes("jacobsschool-ucsd.12twenty.com")) {
           const companyLink = document.querySelector("a[ng-if='$ctrl.canViewEmployerProfile']");
@@ -254,18 +240,39 @@ signInBtn.addEventListener("click", async () => {
     await getToken(true);
     await updateSignInStatus();
   } catch (err) {
-    alert("Sign in failed: " + err.message);
+    jobStatusDiv.textContent = "❌ Sign in failed: " + err.message;
+    jobStatusDiv.classList.add("show");
+    setTimeout(() => {
+      jobStatusDiv.classList.remove("show");
+      jobStatusDiv.textContent = "";
+    }, 5000);
   }
 });
 
 // === Log Job button ===
 logButton.addEventListener("click", async () => {
   const sheetId = extractSheetId(sheetUrlInput.value.trim());
-  if (!sheetId) return alert("⚠️ Invalid Google Sheet URL.");
+  if (!sheetId) {
+    jobStatusDiv.textContent = "⚠️ Invalid Google Sheet URL.";
+    jobStatusDiv.classList.add("show");
+    setTimeout(() => {
+      jobStatusDiv.classList.remove("show");
+      jobStatusDiv.textContent = "";
+    }, 4000);
+    return;
+  }
 
   try {
     const token = await updateSignInStatus();
-    if (!token) return alert("Please sign in with Google first.");
+    if (!token) {
+      jobStatusDiv.textContent = "⚠️ Please sign in with Google first.";
+      jobStatusDiv.classList.add("show");
+      setTimeout(() => {
+        jobStatusDiv.classList.remove("show");
+        jobStatusDiv.textContent = "";
+      }, 4000);
+      return;
+    }
 
     const jobInfo = await extractJobInfo();
 
@@ -288,8 +295,12 @@ logButton.addEventListener("click", async () => {
 
     await appendRow(sheetId, newRow);
   } catch (err) {
-    console.error(err);
-    alert("❌ Error logging job: " + err.message);
+    jobStatusDiv.textContent = "❌ Error logging job: " + err.message;
+    jobStatusDiv.classList.add("show");
+    setTimeout(() => {
+      jobStatusDiv.classList.remove("show");
+      jobStatusDiv.textContent = "";
+    }, 5000);
   }
 });
 
