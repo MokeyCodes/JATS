@@ -12,7 +12,7 @@
   "oauth2": {
     "client_id": "1029000931349-rokqmdsn85labtshtoefhlqljub26v3e.apps.googleusercontent.com",
     "scopes": [
-      "https://www.googleapis.com/auth/spreadsheets"
+      "https://www.googleapis.com/auth/drive.file"
     ]
   },
   "background": {
@@ -29,6 +29,7 @@
     "128": "icons/icon128.png"
   },
   "host_permissions": [
-    "https://sheets.googleapis.com/*"
+    "https://sheets.googleapis.com/*",
+    "https://www.googleapis.com/*"
   ]
 }

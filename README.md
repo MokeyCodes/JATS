@@ -3,11 +3,12 @@
 </p>
 
 
-# J.A.T.S. (Job Application Tracking Service) — v1.0.1
+# J.A.T.S. (Job Application Tracking Service) — v1.1.0
 
 **A Chrome extension that logs job applications from LinkedIn, Handshake, and the UCSD Jacobs Portal directly into Google Sheets.**  
 *May work on other sites, but functionality will be limited.*
 
+**Homepage:** [https://mokeycodes.github.io/JATS/](https://mokeycodes.github.io/JATS/)
 
 ## Features
 
@@ -19,8 +20,8 @@
   - Login type (LinkedIn, Handshake, Jacobs Portal)  
 
 - Save and reuse your Google Sheet URL for convenience.  
-- Provides a **template Google Sheet** to make setup easy.  
-- Donation buttons integrated (Buy Me a Coffee, PayPal) without cluttering the UI.  
+- **Auto Generates** a **template Google Sheet** to make setup easy.  
+- Donation buttons integrated (Buy Me a Coffee, PayPal) without cluttering the UI.
 - Responsive, clean popup UI with intuitive inputs and dropdowns.
 
 ---
@@ -101,13 +102,6 @@ After this, Google sign-in and Sheets logging will work locally.
 
 ---
 
-## Template Google Sheet
-
-A ready-to-use Google Sheet specifically made for J.A.T.S.:
-
-[📄 JATS Template Sheet](https://docs.google.com/spreadsheets/d/1A27FybT8BFsiGHfN-kyCkZ5JMO502bzirGSX5UFXmHA/copy)
-
----
 
 ## Usage
 
@@ -128,9 +122,24 @@ A ready-to-use Google Sheet specifically made for J.A.T.S.:
 
 ## Screenshots
 
-| v1.0.0 | v1.0.1 |
+| v1.0.1 | v1.1.0 |
 |--------|--------|
-| <img src="assets/screenshots/popup-1.0.0.png" alt="v1.0.0" width="300"/> | <img src="assets/screenshots/popup-1.0.1v2.png" alt="v1.0.1" width="300"/> |
+| <img src="assets/screenshots/popup-1.0.1v2.png" alt="v1.0.1" width="300"/> | <img src="assets/screenshots/popup-1.1.0.png" alt="v1.1.0" width="300"/> |
+
+### Template Creation Update
+
+In **v1.1.0**, JATS automatically creates a Google Sheet template the first time you log a job.  
+
+- The **“Copy Template”** button from v1.0.1 is no longer needed and has been removed.  
+- Users only need to **sign in and log a job**, and JATS will automatically generate a pre-formatted sheet with:
+  - Navy blue headers with bold white text
+  - Dual-row column titles (title + description)
+  - Colored login cells
+  - Dropdown options for job status with data validation
+  - Frozen header row for easy navigation
+- Any previously saved Google Sheet link is automatically used if available.
+
+This streamlines setup and ensures users always have a properly formatted sheet without manual copying.
 
 ---
 For full version history, see [CHANGELOG.md](CHANGELOG.md)
@@ -139,3 +148,5 @@ For full version history, see [CHANGELOG.md](CHANGELOG.md)
 ## License
 
 This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+
+**Project Homepage:** [https://mokeycodes.github.io/JATS/](https://mokeycodes.github.io/JATS/)
