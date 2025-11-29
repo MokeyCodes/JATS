@@ -183,7 +183,7 @@ async function createTemplateSheet() {
 
     // 8) Conditional formatting for Status dropdown colors
     const statusColors = {
-      "Applied": { red:1, green:0.8, blue:0.8 },          // light red
+      "Applied": { red:0.831, green:0.93, blue:0.737 },          // light green
       "Phone Interview": { red:1, green:1, blue:0.6 },    // yellow
       "Rejected": { red:1, green:0.6, blue:0.6 },         // red/pink
       "Online Assessment": { red:0.8, green:0.9, blue:1 },// light blue
