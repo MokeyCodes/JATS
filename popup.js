@@ -1,5 +1,3 @@
-// popup.js (replace / merge with your current popup.js)
-
 // === DOM references ===
 const logButton = document.getElementById("logJob");
 const loginSelect = document.getElementById("loginSelect");
@@ -411,38 +409,50 @@ async function extractJobInfo() {
         });
 
       return (async () => {
-        await waitForElement("h1");
-        const jobTitle = document.querySelector("h1")?.innerText ||
-                         document.querySelector(".top-card-layout__title")?.innerText ||
-                         document.querySelector("h2")?.innerText ||
-                         "No title found";
-
-        let company = "No Company Found";
         const url = window.location.href;
+        let jobTitle = "No title found";
+        let company = "No Company Found";
 
         if (url.includes("linkedin.com")) {
-          const links = Array.from(document.querySelectorAll("a[href*='/company/']"));
-          for (const link of links) {
-            const text = link.innerText.trim();
-            if (text) { company = text; break; }
-            const span = link.querySelector("span");
-            if (span && span.innerText.trim()) { company = span.innerText.trim(); break; }
-          }
+          // Parse directly from document.title — format: "Job Title | Company | LinkedIn"
+          const parts = document.title.split(" | ");
+          jobTitle = parts[0]?.trim() || "No title found";
+          company  = parts[1]?.trim() || "No Company Found";
+
         } else if (url.includes("joinhandshake.com")) {
-          const jobDetailsContainer = document.querySelector('[data-hook="job-details-page"]');
-          if (jobDetailsContainer) {
-            const companyDiv = jobDetailsContainer.querySelector('div');
-            if (companyDiv) {
-              const textEls = Array.from(companyDiv.querySelectorAll('*'))
-                .filter(el => el.innerText.trim().length > 0);
-              if (textEls.length > 0) {
-                company = textEls[0].innerText.trim().split("\n")[0];
-              }
-            }
+          // Wait for h1 to load
+          await waitForElement("h1");
+          jobTitle = document.querySelector("h1")?.innerText.trim() || "No title found";
+
+          // Try multiple selectors for company name
+          const companySelectors = [
+            "[data-hook='employer-profile-link']",
+            "[class*='employer-name']",
+            "[class*='company-name']",
+            "a[href*='/employers/']",
+          ];
+          for (const sel of companySelectors) {
+            const el = document.querySelector(sel);
+            if (el?.innerText.trim()) { company = el.innerText.trim(); break; }
           }
+
+          // Last resort: grab from document.title
+          // Handshake title format: "Job Title - Company | Handshake"
+          if (company === "No Company Found") {
+            const parts = document.title.split(/[-|]/);
+            if (parts.length >= 2) company = parts[1]?.trim() || "No Company Found";
+          }
+
         } else if (url.includes("jacobsschool-ucsd.12twenty.com")) {
+          await waitForElement("h1");
+          jobTitle = document.querySelector("h1")?.innerText.trim() || "No title found";
           const companyLink = document.querySelector("a[ng-if='$ctrl.canViewEmployerProfile']");
           if (companyLink) company = companyLink.innerText.trim();
+        
+        } else {
+          // Generic fallback
+          await waitForElement("h1");
+          jobTitle = document.querySelector("h1")?.innerText.trim() || "No title found";
         }
 
         return {
