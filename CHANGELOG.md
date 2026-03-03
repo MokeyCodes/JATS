@@ -1,7 +1,11 @@
 # Changelog
-
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-03-03
+
+### Fixed
+- LinkedIn job title and company extraction now parses `document.title` instead of broken DOM selectors (LinkedIn removed h1 elements from job pages).
+- Handshake company extraction replaced fragile single `data-hook` selector with a multi-selector fallback chain, with `document.title` as a final fallback.
 
 ## [1.1.0] - 2025-11-19
 
@@ -14,20 +18,21 @@ All notable changes to this project will be documented in this file.
 - Smaller font size for description row for better readability.
 
 ### Changed
-- Removed “Copy Template” button as template is now auto-generated.
+- Removed "Copy Template" button as template is now auto-generated.
 - Improved error handling when no sheet is found; auto-creates new template if needed.
 - Improved UI/UX for logging jobs and sheet creation.
 - **Uses only non-sensitive scopes (`drive.file`) — no invasive verification required.**
 
 ## [v1.0.1] - Released
+
 ### Added
 - README improvements
-    - Side by side screenshots of UI Improvements
-    - Google Form Request for Features/Website Functionality/Bugs
+- Side by side screenshots of UI Improvements
+- Google Form Request for Features/Website Functionality/Bugs
 - Dropdowns
-    - Added a button to copy a Google Sheets Template
-    - Donation Dropdown
-    - Request New Website Support/Bug
+  - Added a button to copy a Google Sheets Template
+  - Donation Dropdown
+  - Request New Website Support/Bug
 - Updated job logging UI
   - Replaced `alert()` pop-ups with inline animation for job log confirmation
 
@@ -35,6 +40,7 @@ All notable changes to this project will be documented in this file.
 - Minor code improvements and bug fixes
 
 ## [v1.0.0] - Released
+
 ### Added
 - Initial release of J.A.T.S. Chrome Extension
 - Logs job applications from LinkedIn, Handshake, and UCSD Jacobs Portal
