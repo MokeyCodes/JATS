@@ -84,8 +84,7 @@ const STATUS_DROPDOWN_OPTIONS = [
   "Performance Task"
 ];
 
-// === Create new templated Google Sheet ===
-// === Create new templated Google Sheet ===
+
 // === Create new templated Google Sheet with title + description + conditional formatting ===
 async function createTemplateSheet() {
   try {
